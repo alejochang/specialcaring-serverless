@@ -1,0 +1,48 @@
+type Drug {
+  name: String!
+  description: String
+  type: Int
+  activeIngredient: String
+  unit: String
+  concentration: Int
+  presentation: String
+  quantity: Int
+  brands: [String]
+}
+
+type OpenFDADrug {
+  genericName: String
+  pharmClass: String
+  brandName: String
+  manufacturerName: String
+  productType: String
+  route: String
+}
+
+type DrugQuery {
+  drugs: [Drug!]!
+  drug(id: ID!): Drug
+}
+
+type OpenFDADrugQuery {
+  openFDADrugs(activeIngredient: String!): [OpenFDADrug!]!
+}
+
+type DrugMutation {
+  drugs: [Drug!]!
+  drug(id: ID!): Drug
+}
+
+type DrugMutation {
+  addDrug(
+    name: String!,
+    description: String!,
+    type: Int!,
+    activeIngredient: String!,
+    unit: String!,
+    concentration: Int!,
+    presentation: String!,
+    quantity: Int!
+  ): Drug!
+  deleteDrug(id: ID!): Drug!
+}
