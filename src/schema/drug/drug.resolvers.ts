@@ -1,21 +1,25 @@
 import axios from 'axios';
+
+import { config } from '../../config/config';
+import { reduceField } from '../../utils/transformUtils';
 import { Drug } from './drug.model';
 
-export const drug = async (_id) => {
+export const drug = async (obj, args) => {
+  console.log(`AQUI DRUG ${args.id}`);
   try {
-    return await Drug.findOne(_id).lean();
+    return await Drug.findOne({  _id: args.id } ).lean();
   } catch (err) {
     throw new Error(err);
   }
 };
 
 const transformOpenFDA = (apiDrug) => ({
-  genericName: apiDrug.openfda.generic_name.join(' '),
-  pharmClass: apiDrug.openfda.pharm_class_epc.join(' '),
-  brandName: apiDrug.openfda.brand_name.join(' '),
-  manufacturerName: apiDrug.openfda.manufacturer_name.join(' '),
-  productType: apiDrug.openfda.product_type.join(' '),
-  route: apiDrug.openfda.route.join(' ')
+  genericName: reduceField(apiDrug.openfda.generic_name),
+  pharmClass: reduceField(apiDrug.openfda.pharm_class_epc),
+  brandName: reduceField(apiDrug.openfda.brand_name),
+  manufacturerName: reduceField(apiDrug.openfda.manufacturer_name),
+  productType: reduceField(apiDrug.openfda.product_type),
+  route: reduceField(apiDrug.openfda.route)
 });
 
 export const drugs = async () => {
@@ -31,13 +35,13 @@ export const drugs = async () => {
 
 
 
-export const openFDADrugs = async () => {
+export const openFDADrugs = async (obj, args) => {
   try {
-    const { data } = await axios.get('https://api.fda.gov/drug/label.json?api_key=1zqk60G3uwAtGelalCTHTV1sHbesgrFfaFzTW7Z7&search=openfda.generic_name:lorazepam&limit=100');
-    console.log(data.results);
-    console.log(data.results.map(transformOpenFDA));
-    return data.results.map(transformOpenFDA); // (Or whatever)
+    const {url, apiKey} = config.openFDA;
+    const { data } = await axios.get(`${url}?api_key=${apiKey}&search=openfda.generic_name:${args.genericName}&limit=100`);
+    return data.results.map(transformOpenFDA);
   } catch (err) {
+    console.log(err);
     throw new Error(err);
   }
 }

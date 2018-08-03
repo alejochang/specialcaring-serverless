@@ -7,5 +7,9 @@ export const config = {
    name: env.MONGODB_NAME,
    user: env.MONGODB_USER,
    password: env.MONGODB_PASSWORD
+ },
+ openFDA: {
+   url: env.OPENFDA_API_URL,
+   apiKey: env.OPENFDA_API_KEY
  }
 };

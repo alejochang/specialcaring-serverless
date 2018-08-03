@@ -1,0 +1,1 @@
+export const reduceField = (fieldArray) => fieldArray ? fieldArray.join(' ') : '';

@@ -19,9 +19,9 @@ type OpenFDADrug {
 }
 
 type Query {
-  drugs: [Drug!]!
   drug(id: ID!): Drug
-  openFDADrugs: [OpenFDADrug]
+  drugs: [Drug!]!
+  openFDADrugs(genericName: String!): [OpenFDADrug]
 }
 
 type Mutation {

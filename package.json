@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "start": "sls offline start",
-    "deploy": "serverless deploy",
+    "deploy": "SLS_DEBUG=* serverless deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alejandro Chang <alejandro@playdly.com>",
