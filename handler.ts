@@ -1,6 +1,7 @@
 require('dotenv').config();
 import * as mongoose from 'mongoose';
 import { GraphQLServerLambda } from 'graphql-yoga';
+import { importSchema } from 'graphql-import';
 import { resolvers } from './src/schema/resolvers';
 import { config } from './src/config/config';
 
@@ -16,9 +17,10 @@ const connectDb = async () => {
   });
 }
 
+const typeDefs = importSchema('./src/schema/schema.graphql');
 
 const lambda = new GraphQLServerLambda({
-  typeDefs: './src/schema/schema.graphql',
+  typeDefs,
   resolvers
 })
 

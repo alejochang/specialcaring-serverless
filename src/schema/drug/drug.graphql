@@ -7,7 +7,6 @@ type Drug {
   concentration: Int
   presentation: String
   quantity: Int
-  brands: [String]
 }
 
 type OpenFDADrug {
@@ -19,21 +18,13 @@ type OpenFDADrug {
   route: String
 }
 
-type DrugQuery {
-  drugs: [Drug!]!
+type Query {
   drug(id: ID!): Drug
-}
-
-type OpenFDADrugQuery {
-  openFDADrugs(activeIngredient: String!): [OpenFDADrug!]!
-}
-
-type DrugMutation {
   drugs: [Drug!]!
-  drug(id: ID!): Drug
+  openFDADrugs(genericName: String!): [OpenFDADrug]
 }
 
-type DrugMutation {
+type Mutation {
   addDrug(
     name: String!,
     description: String!,

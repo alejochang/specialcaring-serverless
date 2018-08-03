@@ -1,39 +1,6 @@
-type Drug {
-  name: String!
-  description: String
-  type: Int
-  activeIngredient: String
-  unit: String
-  concentration: Int
-  presentation: String
-  quantity: Int
-}
+# import Drug from './drug/drug.graphql'
+# import OpenFDADrug from './drug/drug.graphql'
+# import Query.* from './drug/drug.graphql'
+# import Mutation.* from './drug/drug.graphql'
 
-type OpenFDADrug {
-  genericName: String
-  pharmClass: String
-  brandName: String
-  manufacturerName: String
-  productType: String
-  route: String
-}
 
-type Query {
-  drug(id: ID!): Drug
-  drugs: [Drug!]!
-  openFDADrugs(genericName: String!): [OpenFDADrug]
-}
-
-type Mutation {
-  addDrug(
-    name: String!,
-    description: String!,
-    type: Int!,
-    activeIngredient: String!,
-    unit: String!,
-    concentration: Int!,
-    presentation: String!,
-    quantity: Int!
-  ): Drug!
-  deleteDrug(id: ID!): Drug!
-}

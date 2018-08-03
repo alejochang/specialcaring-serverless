@@ -13,7 +13,7 @@ export const drug = async (obj, args) => {
   }
 };
 
-const transformOpenFDA = (apiDrug) => ({
+export const transformOpenFDA = (apiDrug) => ({
   genericName: reduceField(apiDrug.openfda.generic_name),
   pharmClass: reduceField(apiDrug.openfda.pharm_class_epc),
   brandName: reduceField(apiDrug.openfda.brand_name),
