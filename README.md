@@ -5,7 +5,7 @@ API for Specialcaring app, an organizer for caregivers.
 ### Getting started
 
 ```
-git clone https://gitlab.com/alejochang/specialcaring.git
+git clone https://gitlab.com/alejochang/specialcaring-serverless.git
 cd specialcaring
 npm install
 npm run start
