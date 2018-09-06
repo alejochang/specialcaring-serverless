@@ -1,6 +1,19 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const plugins = [
+  new CopyWebpackPlugin([
+    {
+      from: 'src/schema/**/*.graphql',
+    },
+    {
+      from: '.webpack/schema/**'
+    },
+  ])
+];
+
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -16,6 +29,7 @@ module.exports = {
       '.tsx'
     ]
   },
+  plugins,
   output: {
     libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
